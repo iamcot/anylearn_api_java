@@ -5,13 +5,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.anylearn.anylearn_api.entity.User;
 import com.anylearn.anylearn_api.repository.UserRepository;
@@ -31,6 +34,9 @@ public class UserController {
 	@GetMapping("/profile/{phone}")
 	public @ResponseBody Optional<User> profile(@PathVariable String phone) {
         Optional<User> result = userRepository.findByPhone(phone);
+        if (result.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND) ;
+        }
         return result;
 	}
 
