@@ -19,7 +19,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.anylearn.anylearn_api.entity.User;
-import com.anylearn.anylearn_api.repository.UserRepository;
+import com.anylearn.anylearn_api.service.UserService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -28,12 +28,12 @@ public class UserControllerTests {
     private MockMvc mvc;
 
     @MockitoBean
-    private UserRepository userRepository;
+    private UserService userService;
 
     @BeforeEach
     void setup() {
         User cot = User.builder().name("CoT").phone("0395159198").build();
-        Mockito.when(userRepository.findByPhone(cot.getPhone())).thenReturn(Optional.of(cot));
+        Mockito.when(userService.userByPhone(cot.getPhone())).thenReturn(Optional.of(cot));
     }
 
     @Test
