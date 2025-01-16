@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +27,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @GetMapping("/")
 	public String health(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
@@ -33,6 +37,7 @@ public class UserController {
 	@GetMapping("/profile/{phone}")
 	public @ResponseBody Optional<User> profile(@PathVariable String phone) {
         Optional<User> result = userRepository.findByPhone(phone);
+        logger.debug(result.toString());
         if (result.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND) ;
         }

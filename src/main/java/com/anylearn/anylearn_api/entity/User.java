@@ -29,4 +29,14 @@ public class User {
 
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
