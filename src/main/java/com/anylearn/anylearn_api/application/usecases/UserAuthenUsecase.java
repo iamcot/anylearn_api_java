@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import com.anylearn.anylearn_api.application.dto.BaseResponseDto;
@@ -22,10 +21,7 @@ public class UserAuthenUsecase {
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserDetailsService userDetailsService;
+    private AuthenticationManager authenticationManager;
 
     public BaseResponseDto<LoginResponseDto> userLoginToGetToken(String phone, String password) {
         try {
