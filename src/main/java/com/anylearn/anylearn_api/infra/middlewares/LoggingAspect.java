@@ -1,4 +1,4 @@
-package com.anylearn.anylearn_api.middleware;
+package com.anylearn.anylearn_api.infra.middlewares;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,14 +16,14 @@ public class LoggingAspect {
     public Object logMethodExecution(ProceedingJoinPoint joinPoint) 
     throws Throwable {
         long startTime = System.currentTimeMillis();
-        logger.debug("---Entering Method: {}", joinPoint.getSignature());
+        logger.debug(">>>======= Entering Method: {}", joinPoint.getSignature());
 
         Object resuObject;
         try {
             resuObject = joinPoint.proceed();
         } finally {
             long endTime = System.currentTimeMillis();
-            logger.debug("Exitting method {} (Time taken: {}ms)", joinPoint.getSignature(), endTime - startTime);
+            logger.debug("=======>>> Exitting method {} (Time taken: {}ms)", joinPoint.getSignature(), endTime - startTime);
         }
         return resuObject;
     }

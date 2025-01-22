@@ -1,4 +1,4 @@
-package com.anylearn.anylearn_api.entity;
+package com.anylearn.anylearn_api.domain.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -16,10 +16,12 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class User {
-    User() {}
+    User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String phone;
 

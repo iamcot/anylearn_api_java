@@ -1,4 +1,4 @@
-package com.anylearn.anylearn_api;
+package com.anylearn;
 
 
 import org.springframework.boot.SpringApplication;

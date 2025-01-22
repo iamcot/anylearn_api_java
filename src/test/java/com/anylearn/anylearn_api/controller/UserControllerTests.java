@@ -18,8 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.anylearn.anylearn_api.entity.User;
-import com.anylearn.anylearn_api.service.UserService;
+import com.anylearn.anylearn_api.domain.user.entity.User;
+import com.anylearn.anylearn_api.domain.user.services.UserService;
 
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -1,15 +1,15 @@
-package com.anylearn.anylearn_api.service;
+package com.anylearn.anylearn_api.domain.user.services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.anylearn.anylearn_api.entity.User;
-import com.anylearn.anylearn_api.repository.UserRepository;
+import com.anylearn.anylearn_api.domain.user.entity.User;
+import com.anylearn.anylearn_api.domain.user.repositories.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
