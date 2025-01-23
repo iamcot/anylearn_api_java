@@ -1,4 +1,4 @@
-package com.anylearn.anylearn_api.infra.controllers;
+package com.anylearn.anylearn_api.application.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
