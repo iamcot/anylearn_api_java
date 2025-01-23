@@ -46,9 +46,9 @@ public class UserAuthenUsecase {
         }
     }
 
-    public Authentication authenticate(UserDetails userDetails, String rawPassword) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userDetails.getUsername(), rawPassword));
-        return authentication;
-    }
+    // private Authentication authenticate(UserDetails userDetails, String rawPassword) {
+    //     Authentication authentication = authenticationManager.authenticate(
+    //             new UsernamePasswordAuthenticationToken(userDetails.getUsername(), rawPassword));
+    //     return authentication;
+    // }
 }

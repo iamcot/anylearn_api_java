@@ -19,7 +19,7 @@ public class AuthController {
     private UserAuthenUsecase userAuthenUsecase;
 
     @PostMapping("/login")
-    public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody() LoginRequestDto loginRequest) {
+    public ResponseEntity<?> login(@RequestBody() LoginRequestDto loginRequest) {
         BaseResponseDto<LoginResponseDto> response = userAuthenUsecase.userLoginToGetToken(loginRequest.getPhone(),
                 loginRequest.getPassword());
         return ResponseEntity.status(response.getStatus()).body(response);

@@ -54,7 +54,7 @@ public class UserControllerTests {
     }
 
     @Test
-    public void giveNoToken_whenGetProfile_thenError403() throws Exception {
+    void giveNoToken_whenGetProfile_thenError403() throws Exception {
         mvc.perform(get("/user/profile"))
                 .andExpect(status().is4xxClientError());
 
