@@ -24,9 +24,9 @@ public class ConfigHomeDto {
 
     private List<Article> articles;
 
-    private List<String> promotions;
+    private List<Article> promotions;
 
-    private String asks;
+    private AskBoxDto asks;
 
     private BoxHasTitleDto<Item> recommendations;
 
