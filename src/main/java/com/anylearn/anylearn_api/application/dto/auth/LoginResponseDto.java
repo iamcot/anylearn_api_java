@@ -1,4 +1,4 @@
-package com.anylearn.anylearn_api.application.dto;
+package com.anylearn.anylearn_api.application.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

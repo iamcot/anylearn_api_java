@@ -18,8 +18,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.anylearn.anylearn_api.application.dto.BaseResponseDto;
-import com.anylearn.anylearn_api.application.dto.LoginRequestDto;
-import com.anylearn.anylearn_api.application.dto.LoginResponseDto;
+import com.anylearn.anylearn_api.application.dto.auth.LoginRequestDto;
+import com.anylearn.anylearn_api.application.dto.auth.LoginResponseDto;
 import com.anylearn.anylearn_api.application.usecases.UserAuthenUsecase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

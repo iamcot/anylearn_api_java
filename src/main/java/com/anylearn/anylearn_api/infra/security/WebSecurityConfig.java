@@ -25,7 +25,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        String[] allowPaths = { "/", "/auth/login" };
+        String[] allowPaths = { "/", "/auth/login", "/config/*" };
         http
                 .httpBasic(httpbasic -> httpbasic.disable())
                 .csrf(csrf -> csrf.disable())

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anylearn.anylearn_api.application.dto.BaseResponseDto;
-import com.anylearn.anylearn_api.application.dto.LoginRequestDto;
-import com.anylearn.anylearn_api.application.dto.LoginResponseDto;
+import com.anylearn.anylearn_api.application.dto.auth.LoginRequestDto;
+import com.anylearn.anylearn_api.application.dto.auth.LoginResponseDto;
 import com.anylearn.anylearn_api.application.usecases.UserAuthenUsecase;
 
 @RestController()
