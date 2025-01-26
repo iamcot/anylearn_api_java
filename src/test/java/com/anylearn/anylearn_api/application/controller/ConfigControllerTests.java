@@ -5,10 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Optional;
-
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,44 +16,39 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.anylearn.anylearn_api.domain.user.entity.User;
+import com.anylearn.anylearn_api.domain.configs.ConfigurationKeys;
 import com.anylearn.anylearn_api.domain.user.services.UserService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTests {
+public class ConfigControllerTests {
     @Autowired
     private MockMvc mvc;
 
     @MockitoBean
     private UserService userService;
 
-    @BeforeEach
-    void setup() {
-        User cot = User.builder().name("CoT").phone("0395359198").build();
-        Mockito.when(userService.userByPhone(cot.getPhone())).thenReturn(Optional.of(cot));
-    }
 
     @Test
-    @WithMockUser(username = "0395359198", authorities = {"member"})
-    void giveValidPhone_whenGetProfileByPhone_thenGetUser() throws Exception {
-        mvc.perform(get("/user/profile"))
+    void givenVoid_whenGetConfigHome_thenGetData() throws Exception {
+        mvc.perform(get("/config/home"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.data.name", Matchers.is("CoT")));
+                .andExpect(jsonPath("$.data", Matchers.hasKey("banners")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("ios_transaction")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("quote_url")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("banner_ratio")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("popup")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("articles")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("promotions")))
+                .andExpect(jsonPath("$.data", Matchers.hasKey("asks")))
+                ;
     }
 
     @Test
     @WithMockUser(username = "1", authorities = {"member"})
-    void giveInvalidPhone_whenGetProfileByPhone_then404() throws Exception {
-        mvc.perform(get("/profile"))
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    void giveNoToken_whenGetProfile_thenError403() throws Exception {
-        mvc.perform(get("/user/profile"))
-                .andExpect(status().is4xxClientError());
-
+    void giveInvalidPhone_whenGetConfigHome_stillOk() throws Exception {
+        mvc.perform(get("/config/home"))
+                .andExpect(status().isOk());
     }
 }

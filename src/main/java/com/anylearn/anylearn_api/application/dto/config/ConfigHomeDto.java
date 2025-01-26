@@ -4,16 +4,20 @@ import java.util.List;
 
 import com.anylearn.anylearn_api.domain.articles.entity.Article;
 import com.anylearn.anylearn_api.domain.course.entity.Item;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
 @Data
 public class ConfigHomeDto {
 
+    @JsonProperty("ios_transaction")
     private Boolean iosTransaction;
 
+    @JsonProperty("quote_url")
     private String quoteUrl;
 
+    @JsonProperty("banner_ratio")
     private Float bannerRatio;
 
     private String catType;
