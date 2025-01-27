@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anylearn.anylearn_api.application.dto.BaseResponseDto;
+import com.anylearn.anylearn_api.application.services.EmailConsumerService;
+import com.anylearn.anylearn_api.domain.notification.services.EmailService;
 import com.anylearn.anylearn_api.domain.user.entity.User;
 import com.anylearn.anylearn_api.domain.user.services.UserService;
 
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/profile")
     public ResponseEntity<?> profile(@AuthenticationPrincipal UserDetails userDetails) {
@@ -36,6 +41,12 @@ public class UserController {
         }
 
         return ResponseEntity.ok(BaseResponseDto.<User>builder().data(user.get()).build());
+    }
+
+    @GetMapping("/notification")
+    public ResponseEntity<?> notification() {
+        emailService.send("thang", "subject", "body");
+        return ResponseEntity.ok("queue triggered");
     }
 
 }
