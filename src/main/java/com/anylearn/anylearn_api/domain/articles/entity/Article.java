@@ -1,5 +1,6 @@
 package com.anylearn.anylearn_api.domain.articles.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -12,7 +13,7 @@ import lombok.Data;
 
 @Entity(name = "articles")
 @Data
-public class Article {
+public class Article implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

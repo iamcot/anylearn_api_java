@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.anylearn.anylearn_api.application.dto.config.BannerDto;
@@ -25,6 +26,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
     private ObjectMapper mapper = new ObjectMapper();
 
     @Override
+    @Cacheable(value = "configuration", key = "'homeConfig'")
     public HashMap<String, String> getConfigHome() {
         HashMap<String, String> homeConfigs = new HashMap<>();
 

@@ -3,6 +3,7 @@ package com.anylearn.anylearn_api.application.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepo articleRepo;
 
     @Override
+    @Cacheable(value = "articles", key = "'lastReadArticle-' + #size")
     public List<Article> getLastReadArticles(Integer size) {
         return articleRepo.findByTypeAndStatusOrderByIdDesc(ArticleTypeEnum.read, true, PageRequest.of(0, size));
     }
@@ -37,14 +39,17 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Cacheable(value = "articles", key = "'filterArticles-' + #type + '-' + #pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<Article> filterArticles(ArticleTypeEnum type, Pageable pageable) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'filterArticles'");
     }
 
     @Override
+    @Cacheable(value = "articles", key = "'lastPromotionArticle-' + #size")
     public List<Article> getLastPromotionArticles(Integer size) {
         return articleRepo.findByTypeAndStatusOrderByIdDesc(ArticleTypeEnum.promotion, true, PageRequest.of(0, size));
     }
+
     
 }

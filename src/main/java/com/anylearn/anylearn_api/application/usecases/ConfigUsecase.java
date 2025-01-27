@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.anylearn.anylearn_api.application.dto.config.AskBoxDto;
 import com.anylearn.anylearn_api.application.dto.config.ConfigHomeDto;
 import com.anylearn.anylearn_api.domain.articles.entity.Ask;
-import com.anylearn.anylearn_api.domain.articles.entity.AskTypeEnum;
 import com.anylearn.anylearn_api.domain.articles.services.ArticleService;
 import com.anylearn.anylearn_api.domain.articles.services.AskService;
 import com.anylearn.anylearn_api.domain.configs.ConfigurationKeys;
@@ -49,14 +48,8 @@ public class ConfigUsecase {
         resp.setArticles(articleService.getLastReadArticles(DEFAULT_ARTICLE_READ_SIZE));
         resp.setPromotions(articleService.getLastPromotionArticles(DEFAULT_ARTICLE_PROMOTION_SIZE));
 
-        AskBoxDto askBox = new AskBoxDto();
         Optional<Ask> question = askService.getLastQuestion();
-        if (question.isPresent()) {
-            askBox.setQuestion(question.get());
-            askBox.setAnswers(askService.getQuestionActivities(question.get().getId(), AskTypeEnum.answer, 1));
-            askBox.setComments(askService.getQuestionActivities(question.get().getId(), AskTypeEnum.comment, 1));
-        }
-        resp.setAsks(askBox);
+        resp.setAsks(question.isPresent() ? askService.getAskBox(question.get()) : new AskBoxDto());
         return resp;
     }
 }

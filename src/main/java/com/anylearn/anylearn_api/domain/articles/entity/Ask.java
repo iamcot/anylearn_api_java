@@ -1,5 +1,6 @@
 package com.anylearn.anylearn_api.domain.articles.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -10,7 +11,7 @@ import lombok.Data;
 
 @Entity(name = "asks")
 @Data
-public class Ask {
+public class Ask implements Serializable {
     @Id
     private Long id;
 
