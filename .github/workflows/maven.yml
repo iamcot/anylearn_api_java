@@ -19,6 +19,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      SPRING_DATASOURCE_PASSWORD: test
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:8306/anylearn
+      SECURITY_JWT_SECRET: and0IHNlY3JldCBmb3IgYW55bGVhcm4gYXBw
+      SPRING_RABBITMQ_PASSWORD: guest
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
@@ -28,7 +34,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: SPRING_DATASOURCE_PASSWORD=test SECURITY_JWT_SECRET=and0IHNlY3JldCBmb3IgYW55bGVhcm4gYXBw SPRING_RABBITMQ_PASSWORD=guest mvn -B clean package --file pom.xml -Dspring.profiles.active=no-db
+      run: mvn -B clean package --file pom.xml -Dspring.profiles.active=no-db
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
