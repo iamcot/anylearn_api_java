@@ -1,5 +1,7 @@
 package com.anylearn.anylearn_api.domain.user.entity;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -15,7 +17,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class User {
+public class User implements Serializable{
     User() {
     }
 
@@ -31,6 +33,8 @@ public class User {
 
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
+
+    private String email;
 
     @Override
     public String toString() {

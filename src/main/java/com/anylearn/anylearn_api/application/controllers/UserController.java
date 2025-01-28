@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anylearn.anylearn_api.application.dto.BaseResponseDto;
-import com.anylearn.anylearn_api.application.services.EmailConsumerService;
 import com.anylearn.anylearn_api.domain.notification.services.EmailService;
 import com.anylearn.anylearn_api.domain.user.entity.User;
 import com.anylearn.anylearn_api.domain.user.services.UserService;
@@ -33,7 +32,7 @@ public class UserController {
 
         Optional<User> user = userService.userByPhone(phone);
 
-        if (!user.isPresent()) {
+        if (!user.isPresent()) {// in case loggined user get blocked
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(BaseResponseDto.builder()
                             .status(HttpStatus.NOT_FOUND)
@@ -44,9 +43,15 @@ public class UserController {
     }
 
     @GetMapping("/notification")
-    public ResponseEntity<?> notification() {
-        emailService.send("thang", "subject", "body");
-        return ResponseEntity.ok("queue triggered");
+    public ResponseEntity<?> notification(@AuthenticationPrincipal UserDetails userDetails) {
+        String phone = userDetails.getUsername();
+        userService.userByPhone(phone).ifPresent(user -> {
+            if (user.getEmail() != null) {
+                emailService.send(user.getEmail(), "Notification", "Test");
+            }
+        });
+        
+        return ResponseEntity.ok(BaseResponseDto.builder().message("Notification sent").build());
     }
 
 }
